@@ -1,0 +1,31 @@
+[project]
+name = "content-engine"
+version = "0.1.0"
+description = "Local-first content automation platform foundation."
+requires-python = ">=3.12"
+dependencies = ["Pillow>=10.0,<12.0"]
+
+[project.optional-dependencies]
+publish = ["playwright>=1.45,<2.0"]
+image = [
+    "accelerate>=0.33,<2.0",
+    "diffusers>=0.30,<1.0",
+    "safetensors>=0.4,<1.0",
+    "torch>=2.4,<3.0",
+    "transformers>=4.43,<5.0",
+]
+
+[project.scripts]
+content-engine = "content_engine.__main__:main"
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"

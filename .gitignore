@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+.env
+config.toml
+storage/
+logs/
+cache/
+images/
+assets/
+temp/
+*.db
+*.sqlite
+*.sqlite3

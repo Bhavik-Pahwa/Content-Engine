@@ -1,0 +1,100 @@
+[app]
+name = "content-engine"
+environment = "development"
+timezone = "Asia/Kolkata"
+idle_interval_seconds = 60
+
+[storage]
+root_dir = "storage"
+cache_dir = "storage/cache"
+images_dir = "storage/images"
+assets_dir = "storage/assets"
+temp_dir = "storage/temp"
+
+[database]
+path = "storage/content_engine.sqlite3"
+
+[logging]
+level = "INFO"
+directory = "logs"
+app_log_name = "app.log"
+error_log_name = "error.log"
+max_bytes = 1048576
+backup_count = 5
+
+[runtime]
+dry_run = true
+publishing_paused = true
+queue_target_size = 7
+scheduler_poll_interval_seconds = 5
+worker_concurrency = 2
+retry_delay_seconds = 60
+retry_backoff_multiplier = 2
+retry_max_delay_seconds = 3600
+stale_job_timeout_seconds = 3600
+
+[discovery]
+enabled_topic_providers = ["hacker_news"]
+hacker_news_fetch_limit = 30
+hacker_news_request_timeout_seconds = 5
+hacker_news_retry_count = 2
+duplicate_title_similarity_threshold = 0.88
+
+[discovery.allowed_categories]
+artificial_intelligence = ["ai", "artificial intelligence", "llm", "large language model", "machine learning", "deep learning"]
+programming = ["programming", "python", "javascript", "typescript", "rust", "go", "software"]
+software_engineering = ["software engineering", "architecture", "distributed system", "database", "testing"]
+web_development = ["web", "frontend", "backend", "browser", "css", "html", "react"]
+cloud = ["cloud", "kubernetes", "aws", "azure", "gcp", "serverless"]
+cybersecurity = ["security", "cybersecurity", "vulnerability", "malware", "encryption"]
+developer_tools = ["developer tool", "dev tool", "compiler", "debugger", "cli", "ide"]
+open_source = ["open source", "github", "linux"]
+startups = ["startup", "founder", "venture", "product"]
+
+[planning]
+enabled_personas = ["Engineer", "Educator", "Founder", "Researcher", "Minimalist"]
+hook_styles = ["Question", "Bold Statement", "Prediction", "Contrarian Opinion", "Story", "Statistic", "Tutorial", "Mistake", "Comparison"]
+visual_themes = ["Corporate Illustration", "Minimal Tech", "Futuristic", "Blueprint", "Abstract AI", "Dark UI", "Clean Startup"]
+planning_strategy = "deterministic"
+future_platform_targets = ["linkedin", "blog", "x"]
+
+[knowledge]
+request_timeout_seconds = 8
+retry_count = 2
+max_download_bytes = 2000000
+store_raw_html = true
+min_clean_text_words = 80
+user_agent = "ContentEngine/0.1 (+local knowledge extraction)"
+
+[writing]
+prompt_dir = "prompts"
+enabled_platform_writers = ["linkedin"]
+llm_provider = "openrouter"
+# Prefer OPENROUTER_API_KEY in the environment instead of storing secrets here.
+openrouter_model = "openrouter/free"
+openrouter_timeout_seconds = 30
+generation_retry_limit = 2
+min_post_characters = 450
+max_post_characters = 1800
+banned_phrases = ["in today's fast-paced world", "game changer", "revolutionize", "unlock the power", "delve into", "it's not just"]
+max_hashtags = 5
+allow_emojis = false
+
+[image]
+provider = "local_template"
+model = "local-template-v1"
+width = 1200
+height = 627
+retry_limit = 1
+reuse_cached_images = true
+prompt_version = "1.0.0"
+negative_prompt = "low quality, blurry, distorted text, watermark, logo, faces, hands, clutter"
+
+[publishing]
+provider = "linkedin"
+linkedin_session_dir = "storage/browser/linkedin"
+screenshot_dir = "storage/screenshots"
+timeout_seconds = 30
+require_image = false
+publish_retry_limit = 1
+simulate = false
